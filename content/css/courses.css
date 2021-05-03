@@ -1,0 +1,105 @@
+#courses-display {
+    color: #333;
+    background: #fff;
+    padding: 2rem;
+    position: relative;
+    height: 75vh;
+    width: 100%;
+    /*display: block;*/
+}
+
+#courses-display:before {
+    content: '';
+    background: #a09e9e;
+    background: url('/content/img/studentLife.jpg') no-repeat center center/cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.7;
+}
+
+#courses-display .courses-display-container {
+    display: flexbox;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+
+#showCourses {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+#showCourses .course {
+    border: solid 1px #444;
+    background-color: #fff;
+    padding: 3px;
+    width: 300px;
+    overflow: hidden;
+    height: 260px;
+    text-align: center;
+}
+
+#showCourses .img {
+    cursor: pointer;
+    width: 100%; 
+}
+
+.add-new-course {
+    display: flex;
+    justify-content: center;
+}
+
+.display-flex {
+    display: flex;
+   justify-content: center;
+}
+
+@media(max-width: 500px) {
+    #showCourses {
+        grid-template-columns: repeat(1, 1fr);
+        justify-items: center;
+    }
+}
+
+@media(min-width: 501px) and (max-width: 768px) {
+    #showCourses {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(min-width: 769px) and (max-width: 1024px) {
+    #showCourses {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(min-width: 1401px) and (max-width: 1275px) {
+    #showCourses  {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(min-width: 2025px) and (max-width: 2200px) {
+    #showCourses  {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media(min-width: 2401px) and (max-width: 3200px) {
+    #showCourses  {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media(min-width: 3201px) and (max-width: 6400px) {
+    #showCourses   {
+        grid-template-columns: repeat(8, 1fr);
+    }
+}
+
+

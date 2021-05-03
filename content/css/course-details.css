@@ -1,0 +1,15 @@
+#heading {
+    text-align: center;
+}
+
+#heading img {
+    width: 100%;
+    max-width: 800px;
+    border: solid 0.5rem #152d6d;
+    background-color: #fff;
+    padding: 2.5rem;
+}
+
+hr {
+    margin: 3rem 0;
+}
