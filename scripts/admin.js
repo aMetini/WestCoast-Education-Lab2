@@ -2,7 +2,7 @@
 
 const courseTable = document.querySelector('#course-list');
 const tableView = document.querySelector('#tableView');
-const addVehicleView = document.querySelector('#addCourse-container');
+const addCourseView = document.querySelector('#addCourse-container');
 const searchInput = document.querySelector('#searchInput');
 const searchButton = document.querySelector('#searchButton');
 const saveButton = document.querySelector('#save');
@@ -19,7 +19,7 @@ const overlay = document.querySelector('.overlay');
 const closeModal = document.querySelector('.close-modal');
 
 //Pagination info...
-const numberOfVehicles = document.querySelector('#numberOfVehicles');
+const numberOfCourses = document.querySelector('#numberOfVehicles');
 const pageInfo = document.querySelector('#pageInfo');
 const prevPage = document.querySelector('#prevPage').addEventListener('click', previousPageClicked);
 const nextPage = document.querySelector('#nextPage').addEventListener('click', nextPageClicked);
@@ -178,13 +178,14 @@ function nextPageClicked(){
 }
 
 async function AddCourse() {
-  const vehicle = {
-    registrationNumber: regNoInput.value,
-    make: makeInput.value,
-    model: modelInput.value,
-    modelYear: modelYearInput.value,
-    mileage: mileageInput.value,
-    value: valueInput.value,
+  const course = {
+    courseId: courseId.value,
+    courseNumber: courseNumber.value,
+    title: title.value,
+    description: description.value,
+    length: length.value,
+    category: category.value,
+    price: price.value,
   };
 
   const response = await fetch('/data/courses.json', {
@@ -220,7 +221,8 @@ async function findVehicle(regNo){
   if(!response.ok) throw new Error(response.statusText);
 
   return response.json();
-})
+});
+}
 
 async function loadCourses(page = 1){
   spinner.classList.remove('hidden');
@@ -237,7 +239,8 @@ if(!response.ok){
   updatePagination();
   return response.json();
 });
+}
 
-loadCourses()
+loadCourses() 
 .then(data => createTable(data))
 .catch(err => console.log(err));

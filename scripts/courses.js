@@ -37,7 +37,8 @@ function getCourses(coursesArray) {
 
             console.log(document.querySelectorAll('.course img'));
 
-            var globalCoursesArray = [];/*new CourseCart();*/
+            var globalCoursesArray = [];
+            var courseCart = new CourseCart();
             CreateCoursesArray();
             function getCoursesFromArray(coursesArray) {
                 getCourses(coursesArray);
@@ -48,10 +49,10 @@ function getCourses(coursesArray) {
             function AddCourseToCart(courseNumber) {
                 console.log(courseNumber);
                 let course = {}
-                coursesArray.forEach(item => {
+                globalCoursesArray.forEach(item => {
                     if (item.courseNumber == courseNumber) {
                         course = item;
-                        globalCoursesArray.AddCourseToCart(course);
+                        courseCart.AddCourseToCart(course);
                     }
                 })
                 if (course != {}) {
@@ -60,6 +61,8 @@ function getCourses(coursesArray) {
                 else {
                     console.log("Course not found");
                 }
+
+                courseCart.ListCoursesInCart();
             
             
             

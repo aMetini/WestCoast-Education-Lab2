@@ -1,21 +1,34 @@
 class CourseCart {
     constructor() {
-        this.clearCourseCart();
+        this.shoppingCartArray = [];
     }
 
-get globalCoursesArray() {
-    return this._globalCoursesArray;
+/*get shoppingCartArray() {
+    return this.shoppingCartArray;
 }
 
-set globalCoursesArray(value) {
-    this._globalCoursesArray - value;
-}
+set shoppingCartArray(value) {
+    this.shoppingCartArray - value;
+}*/
 
 AddCourseToCart(Course) {
-    this.globalCoursesArray.push(Course);
+    this.shoppingCartArray.push(Course);
+}
+
+RemoveCourseFromCart(Course) {
+    var index = this.shoppingCartArray.indexOf(Course);
+    if(index > -1) {
+        this.shoppingCartArray.splice(index, 1);
+    }
+}
+
+ListCoursesInCart() {
+    this.shoppingCartArray.forEach(item => {
+        console.log(item);
+    });
 }
 
 clearShoppingCart() {
-    this.globalCoursesArray = [];
+    this.shoppingCartArray = [];
 }
 };
