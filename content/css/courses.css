@@ -54,6 +54,10 @@
     justify-content: center;
 }
 
+#main-nav .container .cart-logo {
+    max-width: 10%;
+}
+
 .display-flex {
     display: flex;
    justify-content: center;

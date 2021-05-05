@@ -27,6 +27,8 @@
                 <li><a class="active" href="courses.html">Courses</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
+                <img src="/content/img/shoppingCartIcon.png" alt="Cart Icon" class="cart-logo">
+                <button class="btn btn-primary" id="viewCartButton">View Cart</button>
             </ul>
         </div>
     </nav>
@@ -45,11 +47,25 @@
     <div class="add-new-course">
         <a href="administration.html" class="btn btn-secondary">Add New Course</a>
     </div>
-    
+
     <main>
         <section id="showCourses" class="courses">
         </section>
+    <!--View Course Cart Modal-->
+        <div class="modal hidden">
+            <button id="closeViewCartModal">&times</button>
+            <section id="viewCart-container" class="hidden">
+                <div class="buttons">
+                    <button class="btn btn-secondary" id="remove">Remove</button>
+                    <button class="btn" id="cancel">Cancel</button>
+                </div>
+            </section>
+        </div>
     </main>
+    <div id="spinner" class="hidden">
+        <img src="/content/img/loading.gif" alt="Loading...">
+    </div>
+    <div class="overlay hidden"></div>
 
     <footer class="footer">
         <div class="footer-container">

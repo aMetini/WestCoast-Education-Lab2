@@ -45,7 +45,7 @@ const searchCourse= function () {
 searchButton.addEventListener('click', searchCourse);
 searchInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') {
-    searchVehicle();
+    searchCourse();
   }
 });
 
@@ -213,7 +213,7 @@ async function removeVehicle(id){
   return response.statusText;
 }
 
-async function findVehicle(regNo){
+async function findCourse(courseNumber){
   spinner.classList.remove('hidden');
   const response = await fetch('data/courses.json')
   .then(response => response.json())

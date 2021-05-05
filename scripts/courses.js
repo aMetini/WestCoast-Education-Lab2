@@ -3,6 +3,16 @@
 const listCoursesButton = document.querySelectorAll('.listCourses');
 const coursesSection = document.querySelector('#showCourses');
 
+const shoppingCartButton = document.querySelector('#viewCartButton');
+const shoppingCartModal = document.querySelector('#viewCartModal');
+const modalDialog = document.querySelector('.modal');
+const overlay = document.querySelector('.overlay');
+const closeShoppingCartModal = document.querySelector('#closeViewCartModal');
+//const closeShoppingCartButton = document.querySelector('#closeViewCart');
+const RemoveShoppingCartButton = document.querySelector('#remove');
+const shoppingCartItems = document.querySelector('#viewCart-container');
+//const shoppingCartHeader = document.querySelector('#viewCartHeader');
+
 const listCourses = function() {
     fetch('/data/courses.json')
         .then(response => response.json())
@@ -11,6 +21,8 @@ const listCourses = function() {
 
 const images = document.querySelectorAll('.course img');
 console.log(images);
+
+//Get Courses Function
 
 function getCourses(coursesArray) {
     coursesSection.innerHTML='';
@@ -37,6 +49,8 @@ function getCourses(coursesArray) {
 
             console.log(document.querySelectorAll('.course img'));
 
+// Get New Course Cart
+
             var globalCoursesArray = [];
             var courseCart = new CourseCart();
             CreateCoursesArray();
@@ -45,8 +59,11 @@ function getCourses(coursesArray) {
                 globalCoursesArray = coursesArray;
             }
  
+// Add Course To Cart Function
 
             function AddCourseToCart(courseNumber) {
+                var cartRow = document.querySelector('div')
+                cartRow.classList.add('cart-row')
                 console.log(courseNumber);
                 let course = {}
                 globalCoursesArray.forEach(item => {
@@ -63,32 +80,36 @@ function getCourses(coursesArray) {
                 }
 
                 courseCart.ListCoursesInCart();
-            
-            
-            
             }
+                var imageSrc = document.querySelectorAll('.course img');
+                var cartRowContents = 
+                    `<div class="cart-item cart-column">
+                        <img class="cart-item-image" src="${imageSrc}" width="100" height="100">
+                        <span class="cart-item-title">${title}</span>
+                    </div>
+                    <span class="cart-price cart-column">${price}</span>
+                    <div class="cart-quantity cart-column">
+                        <input class="cart-quantity-input" type="number" value="1">
+                    </div>`
+                    cartRow.innerHTML = cartRowContents
+                    cartRow.append(cartRow);
             
+        
+            
+// Open View Cart Window
 
-    
+ shoppingCartButton.addEventListener('click', (e) => {
+     e.preventDefault();
 
+     shoppingCartItems.classList.remove('hidden');
+     overlay.classList.remove('hidden');
+     modalDialog.classList.remove('hidden');
+ })
 
-/*
-courses.forEach(course => {
-    courses.insertAdjacentHTML(
-        'beforeend',
-        `<div class = "course">
-            <img id="${course.id}" src="/content/img/${course.imageName}.jpg" alt="${course.courseNumber} ${course.title}" />
-            <p>${course.courseNumber} ${course.title}</p>
-        </div>`
-    );
-});*/
+const openModal = function(courseCart, ListCoursesInCart) {
+    const showCourseCart = document.querySelector('#viewCart-container');
 
-
-/*
-const openModal = function(imageSrc, id) {
-    const image = document.querySelector('.modal-container');
-
-    images.innerHTML = `<img src="${imageSrc}" /><a class="btn" href="course-details.html?courseId=${id}">Discover Courses</a>`;
+    images.innerHTML = `<img src="${courseCart}" /><a class="btn" href="course-details.html?courseId=${id}">Discover Courses</a>`;
 
     overlay.classList.remove('hidden');
     modalDialog.classList.remove('hidden');
@@ -106,14 +127,14 @@ for (let image of images) {
 const quitModal = () => {
     modalDialog.classList.add('hidden');
     overlay.classList.add('hidden');
-}
+};
 
-closeModal.addEventListener('click', quitModal);
-
+closeShoppingCartModal.addEventListener('click', quitModal);
 overlay.addEventListener('click', quitModal);
-
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
         if (!modalDialog.classList.contains('hidden')) {
             quitModal();
-        }*/
+        }
+    }
+});

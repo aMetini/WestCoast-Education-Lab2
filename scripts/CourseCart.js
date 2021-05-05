@@ -3,14 +3,6 @@ class CourseCart {
         this.shoppingCartArray = [];
     }
 
-/*get shoppingCartArray() {
-    return this.shoppingCartArray;
-}
-
-set shoppingCartArray(value) {
-    this.shoppingCartArray - value;
-}*/
-
 AddCourseToCart(Course) {
     this.shoppingCartArray.push(Course);
 }
@@ -30,5 +22,9 @@ ListCoursesInCart() {
 
 clearShoppingCart() {
     this.shoppingCartArray = [];
+}
+
+getShoppingCartArray () {
+    return this.shoppingCartArray;
 }
 };
