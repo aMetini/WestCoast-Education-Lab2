@@ -35,7 +35,8 @@
         "description": "En beskrivning kommer att komma här",
         "length": 40,
         "imageName": "course4",
-        "category": "Programming"
+        "category": "Programming",
+        "price": "$140.00"
     },
     {
         "id": 5,
@@ -44,7 +45,8 @@
         "description": "En beskrivning kommer att komma här",
         "length": 40,
         "imageName": "course5",
-        "category": "Personal Development"
+        "category": "Personal Development",
+        "price": "$140.00"
     },
     {
         "id": 6,

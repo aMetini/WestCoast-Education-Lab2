@@ -3,6 +3,7 @@
 const listCoursesButton = document.querySelectorAll('.listCourses');
 const coursesSection = document.querySelector('#showCourses');
 
+const courseCartList = document.querySelector('#courseCartList');
 const shoppingCartButton = document.querySelector('#viewCartButton');
 const shoppingCartModal = document.querySelector('#viewCartModal');
 const modalDialog = document.querySelector('.modal');
@@ -62,8 +63,8 @@ function getCourses(coursesArray) {
 // Add Course To Cart Function
 
             function AddCourseToCart(courseNumber) {
-                var cartRow = document.querySelector('div')
-                cartRow.classList.add('cart-row')
+                var cartRow = document.createElement('div');
+                cartRow.classList.add('cart-row');
                 console.log(courseNumber);
                 let course = {}
                 globalCoursesArray.forEach(item => {
@@ -80,7 +81,12 @@ function getCourses(coursesArray) {
                 }
 
                 courseCart.ListCoursesInCart();
+                var cartRowContents = "<div> title:" + course.title + "</div>"
+                cartRow.innerHTML=cartRowContents 
+                courseCartList.innerHTML+=cartRow.innerHTML
+                console.log(courseCartList);
             }
+            /*
                 var imageSrc = document.querySelectorAll('.course img');
                 var cartRowContents = 
                     `<div class="cart-item cart-column">
@@ -92,7 +98,7 @@ function getCourses(coursesArray) {
                         <input class="cart-quantity-input" type="number" value="1">
                     </div>`
                     cartRow.innerHTML = cartRowContents
-                    cartRow.append(cartRow);
+                    cartRow.append(cartRow);*/
             
         
             

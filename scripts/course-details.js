@@ -1,10 +1,11 @@
 'use strict';
 
-const title = document.querySelector('#title h2');
-const image = document.querySelector('#heading img');
+const title = document.querySelector('#title');
+const image = document.querySelector('#courseImage');
 const courseNumber = document.querySelector('#courseNumber');
 const length = document.querySelector('#length');
 const category = document.querySelector('#category');
+const price = document.querySelector('#price');
 const description = document.querySelector('#description p');
 
 let courseId = 0;
@@ -19,10 +20,11 @@ console.log(courseId);
 const course = courses.find((course) => course.id == courseId);
 console.log(course)
 
-heading.innerText = `${courses.title} ${courses.category}`;
-image.setAttribute('src', `./content/img/${courses.imageName}.jpg`);
-courseNumber.innerHTML += ` <span style="font-weight: bold;color: #ff0000;">${courses.courseNumber}</span>`;
-category.innerText += ` ${courses.category}`;
+heading.innerText = course.title + " " + ":" + " " + course.category;
+image.setAttribute('src', "/content/img/"+course.imageName + ".jpg");
+courseNumber.innerHTML += " <span style='font-weight: bold;color: #ff0000'> " + course.courseNumber + "</span>";
+category.innerText += ` ${course.category}`;
 length.innerText += ` ${course.length}`;
+price.innerText += `${course.price}`;
 
-description.innerText = `${courses.description}`;
+description.innerText = `${course.description}`;

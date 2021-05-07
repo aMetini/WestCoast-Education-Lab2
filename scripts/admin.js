@@ -79,8 +79,8 @@ addNewButton.addEventListener('click', (e) => {
 });
 
 function createTable(coursesList){
-  vehicleTable.innerHTML = '';
-  for (let course of vehiclesList) {
+  courseTable.innerHTML = '';
+  for (let course of coursesList) {
     createRow(course);
   }
 
@@ -105,8 +105,8 @@ function createTable(coursesList){
   spinner.classList.add('hidden');
 }
 
-function createRow(car){
-  vehicleTable.insertAdjacentHTML(
+function createRow(course){
+  courseTable.insertAdjacentHTML(
     'beforeend',
     `
       <tr>
@@ -117,7 +117,7 @@ function createRow(car){
         <td>${course.description}</td>
         <td>${course.length}</td>
         <td>${course.category}</td>
-        <td>${course.price == undefined ? 0 : course.value}</td>
+        <td>${course.price == undefined ? 0 : course.price}</td>
         <td><i class="far fa-trash-alt delete"></i></td>
       </tr>
     `
@@ -125,14 +125,14 @@ function createRow(car){
 }
 
 function updatePagination(){
-  numberOfVehicles.innerText = `Number of courses ${pagination.totalItems}`;
+  numberOfCourses.innerText = `Number of courses ${pagination.totalItems}`;
   pageInfo.innerText = `Page ${pagination.currentPage} of ${pagination.totalPages}`;
 }
 
 function deleteCourseClicked(vehicleId) {
   removeCourse(courseId)
     .then(response => {
-      loadVehicles()
+      loadCourses()
       .then(data => createTable(data));
     })
     .catch(err => console.log(err));
@@ -154,25 +154,25 @@ document.addEventListener('keydown', function (e) {
 });
 
 function firstPageClicked(){
-  loadVehicles(1)
+  loadCourses(1)
     .then(data => createTable(data))
     .catch(err => console.log(err));
 }
 
 function lastPageClicked(){
-  loadVehicles(pagination.totalPages)
+  loadCourses(pagination.totalPages)
     .then(data => createTable(data))
     .catch(err => console.log(err));
 }
 
 function previousPageClicked(){
-  loadVehicles(pagination.currentPage > 1 ? pagination.currentPage - 1: 1)
+  loadCourses(pagination.currentPage > 1 ? pagination.currentPage - 1: 1)
     .then(data => createTable(data))
     .catch(err => console.log(err));
 }
 
 function nextPageClicked(){
-  loadVehicles(pagination.currentPage < pagination.totalPages ? pagination.currentPage + 1 : pagination.totalPages)
+  loadCourses(pagination.currentPage < pagination.totalPages ? pagination.currentPage + 1 : pagination.totalPages)
     .then(data => createTable(data))
     .catch(err => console.log(err));
 }
@@ -202,7 +202,7 @@ async function AddCourse() {
   return response.json();
 };
 
-async function removeVehicle(id){
+async function removeCourse(id){
   const response = await fetch('/data/courses.json', {
     method: 'DELETE',
     mode: 'cors'
@@ -215,7 +215,7 @@ async function removeVehicle(id){
 
 async function findCourse(courseNumber){
   spinner.classList.remove('hidden');
-  const response = await fetch('data/courses.json')
+  const response = await fetch('/data/courses.json')
   .then(response => response.json())
         .then(data => {
   if(!response.ok) throw new Error(response.statusText);
@@ -226,19 +226,21 @@ async function findCourse(courseNumber){
 
 async function loadCourses(page = 1){
   spinner.classList.remove('hidden');
-  const response = await fetch('data/courses.json')
+  const response = await fetch('/data/courses.json')
   .then(response => response.json())
         .then(data => {
-            coursesList.innerHTML = '';
-
+            courseTable.innerHTML = '';
+            return data;
+/*
 if(!response.ok){
     throw new Error(response.statusText);
 }
   
   pagination = JSON.parse(response.headers.get('pagination'));
   updatePagination();
-  return response.json();
+  return response.json();*/
 });
+return response;
 }
 
 loadCourses() 
