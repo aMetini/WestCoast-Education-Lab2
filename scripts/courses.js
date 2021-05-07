@@ -52,83 +52,74 @@ function getCourses(coursesArray) {
 
 // Get New Course Cart
 
-            var globalCoursesArray = [];
-            var courseCart = new CourseCart();
-            CreateCoursesArray();
-            function getCoursesFromArray(coursesArray) {
-                getCourses(coursesArray);
-                globalCoursesArray = coursesArray;
-            }
+var globalCoursesArray = [];
+var courseCart = new CourseCart();
+CreateCoursesArray();
+function getCoursesFromArray(coursesArray) {
+    getCourses(coursesArray);
+    globalCoursesArray = coursesArray;
+}
  
 // Add Course To Cart Function
 
-            function AddCourseToCart(courseNumber) {
-                var cartRow = document.createElement('div');
-                cartRow.classList.add('cart-row');
-                console.log(courseNumber);
-                let course = {}
-                globalCoursesArray.forEach(item => {
-                    if (item.courseNumber == courseNumber) {
-                        course = item;
-                        courseCart.AddCourseToCart(course);
-                    }
-                })
-                if (course != {}) {
-                    console.log(course.title);
-                }
-                else {
-                    console.log("Course not found");
-                }
+function AddCourseToCart(courseNumber) {
+    console.log(courseNumber);
+    let course = {}
+    globalCoursesArray.forEach(item => {
+        if (item.courseNumber == courseNumber) {
+            course = item;
+            courseCart.AddCourseToCart(course);
+            alert("Added " + course.title + " to your shopping cart");
+        }
+    })
+    if (course != {}) {
+        console.log(course.title);
+    }
+    else {
+        console.log("Course not found");
+    }
 
-                courseCart.ListCoursesInCart();
-                var cartRowContents = "<div> title:" + course.title + "</div>"
-                cartRow.innerHTML=cartRowContents 
-                courseCartList.innerHTML+=cartRow.innerHTML
-                console.log(courseCartList);
-            }
-            /*
-                var imageSrc = document.querySelectorAll('.course img');
-                var cartRowContents = 
-                    `<div class="cart-item cart-column">
-                        <img class="cart-item-image" src="${imageSrc}" width="100" height="100">
-                        <span class="cart-item-title">${title}</span>
-                    </div>
-                    <span class="cart-price cart-column">${price}</span>
-                    <div class="cart-quantity cart-column">
-                        <input class="cart-quantity-input" type="number" value="1">
-                    </div>`
-                    cartRow.innerHTML = cartRowContents
-                    cartRow.append(cartRow);*/
-            
-        
+    
+}
             
 // Open View Cart Window
 
  shoppingCartButton.addEventListener('click', (e) => {
      e.preventDefault();
 
+     openModal();
+
      shoppingCartItems.classList.remove('hidden');
      overlay.classList.remove('hidden');
      modalDialog.classList.remove('hidden');
  })
 
-const openModal = function(courseCart, ListCoursesInCart) {
-    const showCourseCart = document.querySelector('#viewCart-container');
+const openModal = function() {
+    console.log(courseCart);
+    //const showCourseCart = document.querySelector('#viewCart-container');
+    courseCartList.innerHTML='';
+    var cartRow = document.createElement('div');
+    cartRow.classList.add('cart-row');
+    courseCart.getShoppingCartArray().forEach(item => {
+    console.log(item);
+  
 
-    images.innerHTML = `<img src="${courseCart}" /><a class="btn" href="course-details.html?courseId=${id}">Discover Courses</a>`;
+    var cartRowContents = "<div id=" + item.id + "> Title: " + item.title + " (" + item.price + ") <button class=\"btn btn-secondary\" value=" + item.id + " id=\"remove\">Remove</button></div>";
+    cartRow.innerHTML=cartRowContents;
+    courseCartList.innerHTML+=cartRow.innerHTML;
+    console.log(courseCartList);
+
+    });
 
     overlay.classList.remove('hidden');
     modalDialog.classList.remove('hidden');
 }
 
-for (let image of images) {
-    let src = image.getAttribute('src');
-    let id = image.getAttribute('id');
+RemoveShoppingCartButton.addEventListener('click', (e) => {
+    e.preventDefault();
 
-    image.addEventListener('click', function() {
-        openModal(src, id);
-    });
-}
+    RemoveCourseFromCart();
+})
 
 const quitModal = () => {
     modalDialog.classList.add('hidden');
