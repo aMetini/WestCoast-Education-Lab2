@@ -10,12 +10,12 @@ const modalDialog = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const closeShoppingCartModal = document.querySelector('#closeViewCartModal');
 //const closeShoppingCartButton = document.querySelector('#closeViewCart');
-const RemoveShoppingCartButton = document.querySelector('#remove');
+const cancelShoppingCartButton = document.querySelector('#cancel');
 const shoppingCartItems = document.querySelector('#viewCart-container');
 //const shoppingCartHeader = document.querySelector('#viewCartHeader');
 
 const listCourses = function() {
-    fetch('/data/courses.json')
+    fetch('http://localhost:3000/courses')
         .then(response => response.json())
         .then(data => console.log(data))
 }
@@ -109,17 +109,34 @@ const openModal = function() {
     courseCartList.innerHTML+=cartRow.innerHTML;
     console.log(courseCartList);
 
+    const RemoveShoppingCartButton = document.querySelector('#remove');
+
+    RemoveShoppingCartButton.addEventListener('click', (e) => {
+        e.preventDefault();
+    
+        courseCart.RemoveCourseFromCart(item.id);
+    })
+
+
     });
 
+    
     overlay.classList.remove('hidden');
     modalDialog.classList.remove('hidden');
 }
 
-RemoveShoppingCartButton.addEventListener('click', (e) => {
+cancelShoppingCartButton.addEventListener('click', (e) => {
     e.preventDefault();
 
-    RemoveCourseFromCart();
-})
+    courseCart.clearShoppingCart();
+    courseCartList.innerHTML='';
+});
+
+
+
+
+
+
 
 const quitModal = () => {
     modalDialog.classList.add('hidden');

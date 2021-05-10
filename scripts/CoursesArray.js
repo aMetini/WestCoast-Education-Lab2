@@ -1,6 +1,6 @@
 function CreateCoursesArray() {
     let CourseArray = [];
-    fetch('/data/courses.json')
+    fetch('http://localhost:3000/courses')
         .then(response => response.json())
         .then(data => {
             

@@ -129,7 +129,7 @@ function updatePagination(){
   pageInfo.innerText = `Page ${pagination.currentPage} of ${pagination.totalPages}`;
 }
 
-function deleteCourseClicked(vehicleId) {
+function deleteCourseClicked(courseId) {
   removeCourse(courseId)
     .then(response => {
       loadCourses()
@@ -188,7 +188,7 @@ async function AddCourse() {
     price: price.value,
   };
 
-  const response = await fetch('/data/courses.json', {
+  const response = await fetch('http://localhost:3000/courses', {
     method: 'POST',
     mode: 'cors',
     headers: {
@@ -202,8 +202,8 @@ async function AddCourse() {
   return response.json();
 };
 
-async function removeCourse(id){
-  const response = await fetch('/data/courses.json', {
+async function removeCourse(courseId){
+  const response = await fetch('http://localhost:3000/courses/'+ courseId, {
     method: 'DELETE',
     mode: 'cors'
   });
@@ -215,7 +215,7 @@ async function removeCourse(id){
 
 async function findCourse(courseNumber){
   spinner.classList.remove('hidden');
-  const response = await fetch('/data/courses.json')
+  const response = await fetch('http://localhost:3000/courses')
   .then(response => response.json())
         .then(data => {
   if(!response.ok) throw new Error(response.statusText);
@@ -226,7 +226,7 @@ async function findCourse(courseNumber){
 
 async function loadCourses(page = 1){
   spinner.classList.remove('hidden');
-  const response = await fetch('/data/courses.json')
+  const response = await fetch('http://localhost:3000/courses')
   .then(response => response.json())
         .then(data => {
             courseTable.innerHTML = '';
