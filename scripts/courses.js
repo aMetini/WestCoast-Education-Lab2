@@ -115,6 +115,7 @@ const openModal = function() {
         e.preventDefault();
     
         courseCart.RemoveCourseFromCart(item.id);
+        alert("Removed " + item.title + " from your shopping cart");
     })
 
 
@@ -130,6 +131,7 @@ cancelShoppingCartButton.addEventListener('click', (e) => {
 
     courseCart.clearShoppingCart();
     courseCartList.innerHTML='';
+    alert("Your shopping cart is empty.");
 });
 
 
